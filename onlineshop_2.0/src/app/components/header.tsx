@@ -1,13 +1,13 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { HomeIcon, LogInIcon, MenuIcon, ShoppingCartIcon, UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 export default function Header() {
 
-    const{data} = useSession()
+    const { data } = useSession();
 
     const handlerSignin = async ()=>{
         await signIn()
@@ -16,6 +16,7 @@ export default function Header() {
     const logout = ()=>{
         signOut()
     }
+    
 
     return (
         <header className="w-screen h-[10%] flex items-center justify-between bg-gray-400">

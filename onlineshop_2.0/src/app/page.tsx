@@ -7,18 +7,24 @@ import { Button } from "@/components/ui/button";
 import useRequestData from "./hooks/useRequestData";
 import { BASE_URL } from "./constants/URL";
 import Header from "./components/header";
+import { useSession } from "next-auth/react";
 
 const Products:React.FC = () => {
 
     const [products] = useRequestData(`${BASE_URL}products/getallproducts`)
-    console.log(products);
-    
+
+    const { data } = useSession();
+
+    const addCart = (id:string)=>{
+
+        
+    }
    
     const showProducts = products.map((prod:any, key)=>{
         
         return(
-            <Card className="w-[165px] h-[236px] flex flex-col p-0 m-1 relative">
-                <div className="rounded-xl w-[100%] h-[40%] flex justify-center" >
+            <Card key={key} className="w-[165px] h-[236px] flex flex-col p-0 m-1 relative">
+                <div className="rounded-xl w-[100%] h-[40%] flex justify-center">
                     <Image src={prod.urlImg} alt="" width={100} height={130}/>
                 </div>
                 <CardHeader>
@@ -29,11 +35,10 @@ const Products:React.FC = () => {
                     <span>R$ {Number(prod.price).toFixed(2)}</span>
                 </CardContent>
                 <CardFooter className="w-full ">
-                    <Button className="w-[100%] absolute bottom-0 left-0">Add Cart</Button>
+                    <Button className="w-[100%] absolute bottom-0 left-0" onClick={()=>{addCart(prod.id)}}>Add Cart</Button>
                 </CardFooter>
             </Card>
         )
-        
     })
 
  return (
