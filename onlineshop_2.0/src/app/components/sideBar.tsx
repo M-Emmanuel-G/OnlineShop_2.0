@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { HomeIcon, LogInIcon, MenuIcon, ShoppingCartIcon, UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function SideBar() {
 
@@ -33,7 +34,7 @@ export default function SideBar() {
                     <div className="w-full h-full flex flex-col">
                          <div className=" w-full h-[15%] flex items-center justify-between">
                             <Avatar>
-                                <AvatarImage src={data.user.image ?? ""}/>
+                                <AvatarImage className="w-8 rounded-xl" src={data.user.image ?? ""}/>
                             </Avatar>
                             <div>
                                 <span>{data.user.name}</span>
@@ -45,11 +46,11 @@ export default function SideBar() {
                         <div className="w-full h-[80%] flex flex-col ">
                             <div className="flex ">
                                 <HomeIcon/>
-                                <span className="px-2">Início</span>
+                                <Link href="/" className="px-2">Início</Link>
                             </div>
                             <div className="flex my-4 ">
                                 <ShoppingCartIcon/>
-                                <span className="px-2">Meu Carrinho</span>
+                                <Link href="/Cart" className="px-2">Meu Carrinho</Link>
                             </div>
                         </div>
                     </div>

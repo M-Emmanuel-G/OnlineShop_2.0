@@ -6,13 +6,6 @@ import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 export default async function Login() {
-
-    // const session = await getServerSession(authOptions)
-    
-    // if (session?.user) {
-    //     return redirect('/Cart')      
-    // }
-    
  return (
     <main className="w-screen h-screen bg-sky-200 flex flex-col items-center">
         <h2>Realize seu login</h2>
