@@ -10,7 +10,7 @@ const showProducts = await db.products.findMany()
 return (
    <main className="w-screen h-screen">
     <Header/>
-    <section className="w-full h-[90%] overflow-auto flex flex-wrap bg-red-500">
+    <section className="w-full h-[90%] overflow-auto flex flex-wrap bg-black">
       {
         showProducts.map((prod, key)=> (
           <CardProduct

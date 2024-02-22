@@ -2,6 +2,10 @@ import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import React from "react";
+import CardProductCart from "./_Components/CardProductCart";
+import Header from "../components/header";
+import { revalidatePath } from "next/cache";
+  
 
 const Cart:React.FC = async ()=> {
 
@@ -14,34 +18,26 @@ const Cart:React.FC = async ()=> {
         include:{
             product:true
         }
-    })
+    },
+    )
 
     return (
-        <main className="text-white">
-            {
+        <main className="w-screen h-screen text-white flex flex-col">
+            <Header/>
+            <section className="w-full h-[90%] bg-gray-800 flex items-start justify-start flex-wrap overflow-auto">
+                 {
                 showCart.map((cart, key)=>
-                <section key={key}>
-                    <div>
-                        <strong> Produto</strong>
-                        <span>{cart.product.product}</span>
-                    </div>
-                    <div>
-                        <strong> Descricao: </strong>
-                        <span>{cart.product.description}</span>
-                    </div>
-                    <div>
-                        <strong> Quantidade: </strong>
-                        <span>{cart.quantity}</span>
-                    </div>
-                    <div>
-                        <strong> Valor: </strong>
-                        <span>{Number(cart.product.price)}</span>
-                    </div>
-                </section>
+                <CardProductCart
+                    key={key}
+                    cart={cart}
+                    price={Number(cart.product.price)}
+                />
                 )
             }
+            </section>
         </main>
     );
 }
+revalidate:3
 
 export default Cart

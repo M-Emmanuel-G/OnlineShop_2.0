@@ -1,26 +1,20 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertDialogFooter, AlertDialogHeader } from "@/components/ui/alert-dialog";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogTitle, AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Terminal } from "lucide-react";
 
-export default function AlertModal() {
+interface NotifyProps{
+    text:string
+    title:string
+}
+
+
+export default function Notification({title, text}:NotifyProps) {
  return (
-    <AlertDialog>
-  <AlertDialogTrigger>Open</AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-      <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction>Continue</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog>
-  
+    <Alert>
+        <Terminal className="h-4 w-4" />
+        <AlertTitle>{title}</AlertTitle>
+        <AlertDescription>
+            {text}
+        </AlertDescription>
+    </Alert>
  );
 }
