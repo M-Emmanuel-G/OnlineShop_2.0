@@ -5,29 +5,42 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { HomeIcon, LogInIcon, MenuIcon, ShoppingCartIcon, UserIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SideBar() {
 
     const {data} = useSession()
-    
+    const router = useRouter()
 
     const handlerSignin = async ()=>{
         await signIn()
     }
 
-    const logout = ()=>{
-        signOut()
+    const logout = async ()=>{
+        await signOut()
+        if(!data?.user) router.push("/")
     }
 
+
     return (
-        <Sheet>
+       <div className="flex relative right-8">
+        {
+            data?.user ? 
+                <h2 className="mx-4" text-sm>Bem vindo, {data?.user?.name}</h2>
+                    :
+                <h2 className="mx-4 text-sm">Acesse sua conta</h2>
+        }
+         <Sheet>
         <SheetTrigger asChild>
             <MenuIcon/>
         </SheetTrigger>
         <SheetContent>
             <SheetHeader className="text-left">
-                <SheetTitle>Menu</SheetTitle>
+                <SheetTitle className="flex justify-center">
+                    <Image className="rounded-3xl" src="https://utfs.io/f/cd8f685d-c1a2-4ecd-8ac8-6620c711196c-fr26nf.jpg" alt="logo" width={100} height={100}/>
+                </SheetTitle>
             </SheetHeader>
                 {
                      data?.user ?
@@ -44,13 +57,17 @@ export default function SideBar() {
                             </div>
                         </div>
                         <div className="w-full h-[80%] flex flex-col ">
-                            <div className="flex ">
+                            <div className="flex my-4 ">
                                 <HomeIcon/>
                                 <Link href="/" className="px-2">Início</Link>
                             </div>
                             <div className="flex my-4 ">
                                 <ShoppingCartIcon/>
                                 <Link href="/Cart" className="px-2">Meu Carrinho</Link>
+                            </div>
+                            <div className="flex my-4 ">
+                                <UserIcon/>
+                                <Link href="/Profile" className="px-2">Perfil</Link>
                             </div>
                         </div>
                     </div>
@@ -70,5 +87,6 @@ export default function SideBar() {
                 }
             </SheetContent>
         </Sheet>
+       </div>
  );
 }

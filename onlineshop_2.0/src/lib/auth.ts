@@ -8,11 +8,15 @@ export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(db) as Adapter,
   providers: [
     GoogleProvider({
-      clientId: "979325569121-vm24ha9sla7m80st6tttt878ue4iqfm1.apps.googleusercontent.com" as string,
-      clientSecret: "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" as string,
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_SECRET_KEY as string,
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl
+    },
+
     async session({ session, user }) {
       session.user = { ...session.user, id: user.id } as {
         id: string;
@@ -23,5 +27,5 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
-  secret: "askdn2172hnj9-2n12-0=dsja81nh1-",
+  secret: process.env.NEXT_AUTH_SECRET,
 };
