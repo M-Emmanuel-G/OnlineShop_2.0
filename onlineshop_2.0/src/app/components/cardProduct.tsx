@@ -7,6 +7,8 @@ import Image from "next/image";
 import React, { useState } from "react";
 import saveCart from "../actions/save-cart";
 import { Input } from "@/components/ui/input";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ProductProps{
     products:{
@@ -20,6 +22,7 @@ interface ProductProps{
 
 
 const CardProduct = ({products, price}:ProductProps) => {
+
 
     const session = useSession()
     const [qtd, setQtd] = useState<number>(1)
@@ -43,8 +46,10 @@ const CardProduct = ({products, price}:ProductProps) => {
                 quantity:qtd,
                 userId:(session.data?.user as any).id
             })
-            alert("Produto adicionado ao carrinho!")
+            
         }
+
+        toast.success('Produto adicionado com sucesso!')
 }
 
 return (
@@ -54,7 +59,7 @@ return (
                 </div>
                 <CardHeader className="p-0 flex flex-col items-center">
                     <CardTitle className="text-[12px]">{products.product}</CardTitle>
-                    <CardDescription className="text-[8px]">{products.description}</CardDescription>
+                    <CardDescription className="text-[12px]">{products.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="py-0 text-[16px] absolute bottom-10">
                     <div className=" w-full h-[20px] flex items-center justify-center">
@@ -67,10 +72,10 @@ return (
                         />
                         <button className="text-xl mx-2 relative bottom-1" onClick={addQtd}>+</button>
                     </div>
-                    <span>R$ {Number(price)}</span>
+                    <span>R$ {Number(price).toFixed(2)}</span>
                 </CardContent>
                 <CardFooter className="w-full ">
-                    <Button className="w-[100%] absolute bottom-0 left-0" onClick={()=>{addProduct(products.id)}}>Add Cart</Button>
+                    <Button className="w-[100%] absolute bottom-0 left-0" onClick={()=>{addProduct(products.id)}}>Adicionar no Carrinho</Button>
                 </CardFooter>
             </Card>
         )

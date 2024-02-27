@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 interface editProps{
     cartID:string,
@@ -21,4 +22,5 @@ export default async function updateItem({cartID, quantity}:editProps) {
         })
         revalidatePath("/")
         revalidatePath("/Cart")
+        redirect('/Cart')
 }

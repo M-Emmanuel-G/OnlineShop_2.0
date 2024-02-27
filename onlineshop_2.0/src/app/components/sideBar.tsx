@@ -13,16 +13,16 @@ export default function SideBar() {
 
     const {data} = useSession()
     const router = useRouter()
-    
 
     const handlerSignin = async ()=>{
         await signIn()
     }
 
-    const logout = ()=>{
-        router.push("/")
-        signOut()
+    const logout = async ()=>{
+        await signOut()
+        if(!data?.user) router.push("/")
     }
+
 
     return (
        <div className="flex relative right-8">
@@ -57,13 +57,17 @@ export default function SideBar() {
                             </div>
                         </div>
                         <div className="w-full h-[80%] flex flex-col ">
-                            <div className="flex ">
+                            <div className="flex my-4 ">
                                 <HomeIcon/>
                                 <Link href="/" className="px-2">Início</Link>
                             </div>
                             <div className="flex my-4 ">
                                 <ShoppingCartIcon/>
                                 <Link href="/Cart" className="px-2">Meu Carrinho</Link>
+                            </div>
+                            <div className="flex my-4 ">
+                                <UserIcon/>
+                                <Link href="/Profile" className="px-2">Perfil</Link>
                             </div>
                         </div>
                     </div>

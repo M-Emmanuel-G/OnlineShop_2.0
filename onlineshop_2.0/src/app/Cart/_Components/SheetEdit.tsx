@@ -4,7 +4,7 @@ import updateItem from "@/app/actions/edit-item-cart";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useRouter } from "next/navigation";
+import { toast, ToastContainer } from 'react-toastify';
 import { useState } from "react";
 
 interface EditProps{
@@ -13,9 +13,7 @@ interface EditProps{
 
 export default function EditProduct({cartID}:EditProps) {
 
-    const [quantity, setQuantity] = useState<string>('0')
-
-    const router = useRouter()
+    const [quantity, setQuantity] = useState<string>('1')
 
     const updateItems = async ()=>{
         if(!quantity) alert("Valor nao foi inserido")
@@ -23,7 +21,8 @@ export default function EditProduct({cartID}:EditProps) {
         else if(Number(quantity) > 5) alert("Quantidade nao pode ser maior que 5")
         else{
             await updateItem({cartID, quantity})
-            alert("Produto alterado com sucesso!")}
+            alert("Produto alterado com sucesso!")
+        }
     }
 
  return (

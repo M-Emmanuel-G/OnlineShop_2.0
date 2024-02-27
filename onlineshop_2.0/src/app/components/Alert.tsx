@@ -1,20 +1,25 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Terminal } from "lucide-react";
+"use client"
+ 
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/components/ui/use-toast"
 
-interface NotifyProps{
-    text:string
-    title:string
+interface ToastProps{
+    message:string
 }
-
-
-export default function Notification({title, text}:NotifyProps) {
- return (
-    <Alert>
-        <Terminal className="h-4 w-4" />
-        <AlertTitle>{title}</AlertTitle>
-        <AlertDescription>
-            {text}
-        </AlertDescription>
-    </Alert>
- );
+ 
+export function ToastSimple({message}:ToastProps) {
+  const { toast } = useToast()
+ 
+  return (
+    <Button
+      variant="outline"
+      onClick={() => {
+        toast({
+          description:message,
+        })
+      }}
+    >
+      Show Toast
+    </Button>
+  )
 }
