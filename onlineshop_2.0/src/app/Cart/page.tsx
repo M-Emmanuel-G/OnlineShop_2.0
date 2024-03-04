@@ -22,7 +22,7 @@ const Cart:React.FC = async ()=> {
         }
     })
 
-    const getTotalValueCart = showCart.map((prod)=>{return prod.quantity * Number(prod.product.price)}).reduce((a,b)=> a + b,0)
+    const getTotalValueCart = showCart.map((prod:any)=>{return prod.quantity * Number(prod.product.price)}).reduce((a:number,b:number)=> a + b,0)
     const getItemsCart = showCart.length
 
     return (
@@ -35,7 +35,7 @@ const Cart:React.FC = async ()=> {
                 </section>
                 <section className="w-[376px] h-[600px] rounded-xl bg-white overflow-auto [&::-webkit-scrollbar]:hidden mt-4">
                  {
-                showCart.map((cart, key)=>
+                showCart.map((cart:any, key:number)=>
                     <CardProductCart
                         key={key}
                         cart={cart}
