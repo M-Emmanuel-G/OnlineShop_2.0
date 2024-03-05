@@ -47,9 +47,9 @@ const CardProduct = ({products, price}:ProductProps) => {
                 userId:(session.data?.user as any).id
             })
             
+            toast.success('Produto adicionado com sucesso!')
         }
 
-        toast.success('Produto adicionado com sucesso!')
 }
 
 return (

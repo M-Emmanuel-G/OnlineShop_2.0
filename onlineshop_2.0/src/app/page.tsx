@@ -15,7 +15,7 @@ return (
     <Header/>
     <section className="w-full h-[90%] overflow-auto flex flex-wrap bg-black justify-center">
       {
-        showProducts.map((prod, key)=> (
+        showProducts.map((prod:any, key:number)=> (
           <CardProduct
             key={key}
             products={prod}
